@@ -1,5 +1,6 @@
-const db = require('../models')
-const bcrypt = require('bcryptjs')
+const db = require('../models');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 //check if either username or password is empty
 //check if username already exists
@@ -24,9 +25,21 @@ const register = (req, res) => {
   
         db.User.create(newUser, (err, savedUser) => {
           if (err) return res.status(500).json(err);
-          // don't send back the user's password
-          return res.status(200).json({ id: savedUser._id, username: savedUser.username });
-        })
+          const token = jwt.sign(
+            {
+              username: savedUser.username,
+              _id: savedUser._id
+            },
+            process.env.JWT_SECRET,
+            {
+              expiresIn: "30 days"
+            },
+          );
+          return res.status(200).json({
+            message: 'User Created',
+            token
+          });
+        });
       })
     })
   })
@@ -49,9 +62,20 @@ const login = (req, res) => {
 
     bcrypt.compare(user.password, foundUser.password, (err, match) => {
       if (match) {
-        return res.status(200).json({ id: foundUser._id, username: foundUser.username });
-      } else {
-        return res.sendStatus(400);
+        const token = jwt.sign(
+          {
+            username: foundUser.username,
+            _id: foundUser._id
+          },
+          process.env.JWT_SECRET,
+          {
+            expiresIn: "30 days"
+          },
+        );
+        return res.status(200).json({
+          message: 'User Created',
+          token
+        });
       }
     })
   })

@@ -30,7 +30,7 @@ app.use(bodyParser.json());
 
 // API routes
 app.use('/api/v1', routes.auth);
-// app.use('/api/v1', routes.api);
+app.use('/api/v1', routes.api);
 
 app.get('/', (req, res) => {
   res.send('api page');
