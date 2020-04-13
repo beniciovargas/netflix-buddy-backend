@@ -40,10 +40,10 @@ const register = (req, res) => {
             token
           });
         });
-      })
-    })
-  })
-}
+      });
+    });
+  });
+};
 
 
 //verify the credentials
@@ -76,10 +76,10 @@ const login = (req, res) => {
           message: 'User Created',
           token
         });
-      }
-    })
-  })
-}
+      };
+    });
+  });
+};
 
 module.exports = {
     register,
