@@ -10,7 +10,8 @@ const register = (req, res) => {
       password: req.body.password
   }
 
-  if (!newUser.username || !newUser.password) return res.status(400).send('cannot be null')
+  if (!newUser.username || !newUser.password) 
+    return res.status(400).send('cannot be null')
 
   db.User.findOne({username: newUser.username}, (err, foundUser) => {
     if (err) return res.status(500).json(err)
