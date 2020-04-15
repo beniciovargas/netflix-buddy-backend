@@ -20,6 +20,16 @@ const show = async (req, res) => {
     }
 }
 
+const update = async (req, res) => {
+    try {
+        const updatedUser = await db.User.findByIdAndUpdate(req.params.id, req.body, {new: true});
+        if (!updatedUser) res.status(404).json({error: 'User could not be updated.'});
+        res.json(updatedUser)
+    } catch (err) {
+        res.status(500).json(err);
+    }
+}
+
 const destroy = async (req, res) => {
     try {
         const deletedUser = await db.User.findByIdAndDelete(req.params.id);
@@ -33,5 +43,6 @@ const destroy = async (req, res) => {
 module.exports = {
     index,
     show,
+    update,
     destroy,
 }
