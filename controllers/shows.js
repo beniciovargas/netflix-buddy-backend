@@ -21,14 +21,26 @@ const show = async (req, res) => {
 }
 
 const create = async (req, res) => {
-    try {
-        const newShow = await db.Show.create(req.body);
-        if (!newShow) res.status(404).json({error: 'Show not added'});
-        res.json(newShow); 
-    } catch (err) {
-        res.status(500).json(err);
+    const newShow = {
+        vtype: req.body.vtype,
+        img: req.body.img,
+        title: req.body.title,
+        synopsis: req.body.synopsis,
     }
+        db.Show.create(req.params.id, req.body);
+            if (!newShow) res.status(404).json({error: 'Show not added'});
+            res.json(newShow); 
 }
+
+// const create = async (req, res) => {
+//     try {
+//         const newShow = await db.Show.create(req.params.id, req.body);
+//         if (!newShow) res.status(404).json({error: 'Show not added'});
+//         res.json(newShow); 
+//     } catch (err) {
+//         res.status(500).json(err);
+//     }
+// }
 
 const destroy = async (req, res) => {
     try {

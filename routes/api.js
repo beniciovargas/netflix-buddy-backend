@@ -10,6 +10,6 @@ router.delete('/users/:id', verifyToken, ctrl.users.destroy);
 router.get('/shows', verifyToken, ctrl.shows.index);
 router.get('/shows/:id', verifyToken, ctrl.shows.show);
 router.post('/shows', verifyToken, ctrl.shows.create);
-
+router.delete('/shows/:id', verifyToken, ctrl.shows.destroy);
 
 module.exports = router;
