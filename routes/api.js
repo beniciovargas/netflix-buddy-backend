@@ -8,7 +8,8 @@ router.get('/users/:id', verifyToken, ctrl.users.show);
 router.delete('/users/:id', verifyToken, ctrl.users.destroy);
 
 router.get('/shows', verifyToken, ctrl.shows.index);
-router.get('/shows/:id', verifyToken, ctrl.shows.show)
+router.get('/shows/:id', verifyToken, ctrl.shows.show);
+router.post('/shows', verifyToken, ctrl.shows.create);
 
 
 module.exports = router;
