@@ -6,6 +6,7 @@ const ShowSchema = new Schema({
   img: String,
   title: String,
   synopsis: String,
+  id: Number,
 });
 
 const Show = mongoose.model('Show', ShowSchema);
