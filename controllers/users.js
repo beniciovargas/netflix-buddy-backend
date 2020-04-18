@@ -12,7 +12,11 @@ const index = async (req, res) => {
 
 const show = async (req, res) => {
     try {
-        const user = await db.User.findById(req.params.id);
+        const user = await db.User.findById(req.params.id)
+        .populate('nextUp')
+        .populate('currentlyWatching')
+        .populate('faves')
+        .populate('friends')
         if(!user) res.status(404).json({error: "No users found with that ID."});
         res.json(user);
     } catch (err) {
