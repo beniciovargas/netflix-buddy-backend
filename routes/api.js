@@ -9,6 +9,7 @@ router.put('/users/:id', verifyToken, ctrl.users.update);
 router.put('/users/:id/updateNext', verifyToken, ctrl.users.updateNext)
 router.put('/users/:id/updateCurrent', verifyToken, ctrl.users.updateCurrent)
 router.put('/users/:id/updateFaves', verifyToken, ctrl.users.updateFaves)
+router.put('/users/:id/updateFriends', verifyToken, ctrl.users.updateFriends)
 router.delete('/users/:id', verifyToken, ctrl.users.destroy);
 
 router.get('/shows', verifyToken, ctrl.shows.index);

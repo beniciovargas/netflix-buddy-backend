@@ -62,6 +62,16 @@ const updateFaves = async (req, res) => {
         res.status(500).json(err);
     }
 }
+const updateFriends = async (req, res) => {
+    try {
+        const updatedUserFriends = await db.User.findByIdAndUpdate(req.params.id, 
+            {$push:{"friends": req.body.friends}}, 
+            {new: true});
+        if (!updatedUserFriends) res.status(404).json({error: 'User could not be updated.'});
+    }   catch (err) {
+        res.status(500).json(err);
+    }
+}
 const destroy = async (req, res) => {
     try {
         const deletedUser = await db.User.findByIdAndDelete(req.params.id);
@@ -79,5 +89,6 @@ module.exports = {
     updateNext,
     updateCurrent,
     updateFaves,
+    updateFriends,
     destroy,
 }
